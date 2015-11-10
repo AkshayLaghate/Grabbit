@@ -253,6 +253,15 @@ public class MainActivity extends AppCompatActivity {
         String errorMsg;
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar.setIndeterminate(false);
+            progressBar.setMessage("Fetching Links... ");
+            progressBar.setCanceledOnTouchOutside(false);
+            progressBar.show();
+        }
+
+        @Override
         protected Void doInBackground(String... strings) {
 
             String url = "https://zazkov-youtube-grabber-v1.p.mashape.com/download.video.php?id=" + strings[0];
@@ -342,6 +351,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            progressBar.dismiss();
             showDialog();
         }
     }
